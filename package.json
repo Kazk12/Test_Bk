@@ -1,0 +1,15 @@
+{
+  "name": "test_bk",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000T\u0000e\u0000s\u0000t\u0000_\u0000B\u0000k\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+  "build:css": "tailwindcss build -i ./assets/style/style.css -o ./assets/style/output.css --watch"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
