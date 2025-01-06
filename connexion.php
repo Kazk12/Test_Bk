@@ -17,19 +17,19 @@
         
         <form action="#" method="post">
             <div class="mb-4">
-                <label for="pseudo" class="block text-sm font-medium text-gray-700">Votre Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" placeholder="Votre Pseudo" required 
+                <label for="email" class="block text-sm font-medium text-gray-700">Vôtre email</label>
+                <input type="email" name="pseudo" id="pseudo" placeholder="Vôtre email" required 
                        class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div class="mb-6">
-                <label for="password" class="block text-sm font-medium text-gray-700">Votre Mot de Passe</label>
-                <input type="password" name="password" id="password" placeholder="Votre Mot de Passe" required 
+                <label for="password" class="block text-sm font-medium text-gray-700">Vôtre mot de passe</label>
+                <input type="password" name="password" id="password" placeholder="Vôtre Mot de Passe" required 
                        class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
            
-            <button type="submit" class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Se Connecter</button>
+            <button type="submit" class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Se connecter</button>
         </form>
 
         

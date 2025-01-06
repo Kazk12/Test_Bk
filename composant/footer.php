@@ -1,4 +1,4 @@
-<footer class=" mt-14">
+<footer>
 <section class="bg-gray-800 text-white px-4 py-8 flex flex-wrap gap-8 justify-between">
     
 

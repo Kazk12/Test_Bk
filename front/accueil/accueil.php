@@ -26,12 +26,12 @@
             </p>
         </div>
     </section>
-
-<section class="bg-[#FFB703] text-center">
-
-<h2>
+    <h2 class="text-2xl font-semibold text-center mb-6">
     Nos derniers produits
 </h2>
+<section class="bg-[#FFB703] text-center">
+
+
 
 <article class="border-b-2 border-black pb-4 pt-4 flex items-center flex-col">
 
@@ -40,7 +40,10 @@
     Nom du livre
 </h3>
 <p>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita officiis blanditiis accusamus atque iure fuga quisquam tempora perspiciatis. Libero iusto iure voluptas hic facere odit numquam, quae voluptates minima provident.
+Etat du livre : Neuf
+</p>
+<p>
+    DESCRIPTION COURTE DU LIVRE
 </p>
 <h3>
     Nom du vendeur
@@ -67,13 +70,16 @@
 
 <img src="https://via.placeholder.com/40" alt="Image d'un livre">
 <h3>
-    Nom du livre
+    Nom du livre  
 </h3>
 <p>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita officiis blanditiis accusamus atque iure fuga quisquam tempora perspiciatis. Libero iusto iure voluptas hic facere odit numquam, quae voluptates minima provident.
+Etat du livre : Neuf
+</p>
+<p>
+    DESCRIPTION COURTE DU LIVRE
 </p>
 <h3>
-    Nom du vendeur
+    Nom du vendeur 
 </h3>
 
 <button class="flex items-center justify-center bg-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-blue-600 transition duration-300">
@@ -97,7 +103,7 @@
 
 
 
-<?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
+<?php include_once('../../composant/footer.php'); ?>
 
 
 

@@ -5,7 +5,7 @@ try {
 
 
     $host = "localhost";
-    $dbname = "aura";
+    $dbname = "bookmarket";
     $login = "root";
     $password = "";
 

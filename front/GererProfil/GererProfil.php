@@ -17,8 +17,8 @@
 <!-- SECTION POUR MODIFIER LES INFO DE BASE DE L'UTILISATEUR -->
 
 
-<section>
-    <div class="flex gap-4">
+<section class="mt-4">
+    <div class="flex gap-4 my-4">
         <img src="https://via.placeholder.com/40" alt="PP Utilisateur" class="rounded-full h-20 w-20">
         <div>
             <h2>
@@ -63,7 +63,7 @@
 <!-- SECTION POUR MODIFIER LE MDP DE L'UTILISATEUR -->
 
 
-<section>
+<section class="mb-4">
 
 <h2 class="text-2xl font-bold bg-[#D9D9D9] py-4 text-center mt-8">
     Changer de mot de passe
@@ -73,7 +73,7 @@
 <form action="" method="POST" class="space-y-6">
     <div class="flex flex-wrap gap-4 p-4">
         <div class="w-[100%]">
-            <label for="password" class="block">Votre mot de passe</label>
+            <label for="password" class="block text-center">Votre mot de passe</label>
             <input type="password" name="passwordUtilisateur" id="passwordUtilisateur" class="w-full p-2 border border-gray-300 rounded-md mt-1">
         </div>
         <div class="w-[48%]">
