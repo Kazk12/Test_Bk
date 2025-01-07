@@ -15,7 +15,10 @@
 
         
         <div class="relative">
-            <img src="https://via.placeholder.com/40" alt="Photo de profil" class="rounded-full w-10 h-10 object-cover">
+            <a href="../profil/profil.php">
+            <img src="../../assets/images/Tsuna.jpg" alt="Photo de profil" class="rounded-full w-10 h-10 object-cover">
+            </a>
+            
         </div>
 
        

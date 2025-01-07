@@ -13,18 +13,25 @@
     
     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 class="text-2xl font-semibold text-center mb-6">Connexion</h2>
+
+        <?php  
+        if(isset($_GET['error'])) {
+            echo "<p class='text-red-500 text-center mb-4'>Votre email ou mot de passe est incorrecte.</p>";
+        }
+        
+        ?>
         
         
-        <form action="#" method="post">
+        <form action="./process/connexion.php" method="post">
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Vôtre email</label>
-                <input type="email" name="pseudo" id="pseudo" placeholder="Vôtre email" required 
+                <input type="email" name="user_email" id="email" placeholder="Vôtre email" required 
                        class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div class="mb-6">
                 <label for="password" class="block text-sm font-medium text-gray-700">Vôtre mot de passe</label>
-                <input type="password" name="password" id="password" placeholder="Vôtre Mot de Passe" required 
+                <input type="password" name="user_password" id="password" placeholder="Vôtre Mot de Passe" required 
                        class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 

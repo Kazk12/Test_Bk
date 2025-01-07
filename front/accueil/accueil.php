@@ -1,3 +1,22 @@
+<?php 
+session_start();
+// var_dump($_SESSION);
+
+if (!isset($_SESSION['user'])) {
+    header('Location: ../../index.php');
+    exit;
+}
+
+
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

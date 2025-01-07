@@ -1,3 +1,18 @@
+<?php 
+
+session_start();
+
+var_dump($_SESSION);
+
+
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +34,10 @@
 
 <section class="mt-4">
     <div class="flex gap-4 my-4">
-        <img src="https://via.placeholder.com/40" alt="PP Utilisateur" class="rounded-full h-20 w-20">
+        <img src="../../assets/images/Tsuna.jpg" alt="PP Utilisateur" class="rounded-full h-20 w-20">
         <div>
             <h2>
-                NOM DE L'UTILISATEUR
+                <?= $_SESSION['user']['nom']; ?>
             </h2>
             <form action="submit.php" method="POST">
     <textarea id="description" name="description" rows="2" cols="50" placeholder="Écrivez votre description ici..."></textarea><br>
@@ -30,23 +45,30 @@
 
         </div>
     </div>
-    <form action="" method="POST" class="space-y-6">
+    <form action="../../process/changerProfil.php" method="POST" class="space-y-6">
+    <?php  
+        if(isset($_GET['error'])) {
+            echo "<p class='text-red-500 text-center mb-4'>Veuillez à remplir tous les champs.</p>";
+        }
+        
+        ?>
     <div class="flex flex-wrap gap-4 px-4">
+   
         <div class="w-[48%]">
             <label for="nom" class="block">Nom</label>
-            <input type="text" name="nom" id="nom" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+            <input type="text" name="user_nom" id="nom" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['nom']; ?>">
         </div>
         <div class="w-[48%]">
             <label for="prenom" class="block">Prénom</label>
-            <input type="text" name="prenom" id="prenom" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+            <input type="text" name="user_prenom" id="prenom" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['prenom']; ?>">
         </div>
         <div class="w-[48%]">
             <label for="email" class="block">Email</label>
-            <input type="email" name="email" id="email" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+            <input type="email" name="user_email" id="email" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['email']; ?>">
         </div>
         <div class="w-[48%]">
             <label for="tel" class="block">Téléphone</label>
-            <input type="tel" name="tel" id="tel" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+            <input type="tel" name="user_tel" id="tel" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['tel']; ?>">
         </div>
     </div>
 
@@ -70,11 +92,24 @@
 </h2>
 
 
-<form action="" method="POST" class="space-y-6">
+
+<form action="../../process/changerPassword.php" method="POST" class="space-y-6">
+<?php  
+        if(isset($_GET['error1'])) {
+            echo "<p class='text-red-500 text-center mb-4'>Vôtre nouveau mot de passe ne correspond pas à la confirmation du mot de passe.</p>";
+        }
+        if(isset($_GET['success'])) {
+            echo "<p class='text-green-500 text-center mb-4'>Modification bien pris en compte.</p>";
+        }
+        if(isset($_GET['error2'])) {
+            echo "<p class='text-red-500 text-center mb-4'>Bizarre c'est pas bon.</p>";
+        }
+        
+        ?>
     <div class="flex flex-wrap gap-4 p-4">
         <div class="w-[100%]">
             <label for="password" class="block text-center">Votre mot de passe</label>
-            <input type="password" name="passwordUtilisateur" id="passwordUtilisateur" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+            <input type="password" name="user_password" id="passwordUtilisateur" class="w-full p-2 border border-gray-300 rounded-md mt-1">
         </div>
         <div class="w-[48%]">
             <label for="password" class="block">Votre nouveau mot de passe</label>

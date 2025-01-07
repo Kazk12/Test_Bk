@@ -1,3 +1,51 @@
+<?php
+
+session_start();
+require_once '../../connect/connectDB.php';
+
+if (!isset($_SESSION['user'])) {
+    header('Location: ../../index.php');
+    exit;
+}
+
+try {
+    $sql = "SELECT * FROM etat";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $etats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+catch (PDOException $error) {
+        echo "Erreur lors de la requete : " . $error->getMessage();
+    }
+
+
+
+    try {
+        $sql = "SELECT * FROM genre";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+    }
+    catch (PDOException $error) {
+            echo "Erreur lors de la requete : " . $error->getMessage();
+        }
+    
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,24 +67,42 @@
                 <h2 class="text-2xl font-semibold text-center mb-6">Création de votre annonce</h2>
 
 
-                <form action="#" method="post">
+                <form action="../../process/ajoutAnnonce.php" method="post" enctype="multipart/form-data">
                     <div class="mb-4">
                         <label for="genre" class="block text-sm font-medium text-gray-700">Le genre du livre</label>
                         <select name="genre" id="genre"
                             class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="1">Homme</option>
-                            <option value="1">Femme</option>
+                            <?php 
+                            foreach ($genres as $genre) {
+                                echo "<option value='".$genre['id']."'>".$genre['genre']."</option>";
+                            }
+
+
+                            ?>
+                            
                         </select>
                     </div>
                     <div class="mb-4">
                         <label for="etat" class="block text-sm font-medium text-gray-700">L'état de votre livre</label>
                         <select name="etat" id="etat"
                             class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="1">Neuf</option>
-                            <option value="1">Moyen</option>
-                            <option value="1">Mauvais</option>
+                            <?php 
+                            foreach ($etats as $etat) {
+                                echo "<option value='".$etat['id']."'>".$etat['etat']."</option>";
+                            }
+
+
+                            ?>
+                            
                         </select>
                     </div>
+
+                    <div class="mb-4">
+                        <label for="titre" class="block text-sm font-medium text-gray-700">Image de votre livre</label>
+                        <input type="file" name="image" id="image" placeholder="Vôtre titre de livre" accept="image/*" required
+                            class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
 
                     <div class="mb-4">
                         <label for="titre" class="block text-sm font-medium text-gray-700">Titre de votre livre</label>
@@ -59,8 +125,8 @@
 
 
                     <div class="mb-6">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Vôtre mot de passe</label>
-                        <input type="password" name="password" id="password" placeholder="Vôtre Mot de Passe" required
+                        <label for="prix" class="block text-sm font-medium text-gray-700">Mettez le prix du livre</label>
+                        <input type="number" name="prix" id="prix" placeholder="Le prix de votre livre" min="0" step="0.01" required
                             class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 

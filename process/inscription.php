@@ -91,6 +91,7 @@ try {
             'prenom' => $user_prenom,
             'email' => $user_email,
             'tel' => $user_tel,
+            'role' => $user['role'],
         ];
     } 
 
@@ -109,9 +110,9 @@ try {
     echo "Erreur lors de l'insertion : " . $e->getMessage();
 }
 
-var_dump($user_tel);
-die();
 
+header("Location: ../front/accueil/accueil.php");
+exit;
 
 
 
