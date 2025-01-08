@@ -1,7 +1,9 @@
-<?php 
+<?php
+
+
+
 session_start();
 require_once('../../connect/connectDB.php');
-// var_dump($_SESSION);
 
 if (!isset($_SESSION['user'])) {
     header('Location: ../../index.php');
@@ -14,7 +16,8 @@ try {
      FROM `livre`
     INNER JOIN users ON users.id = livre.id_seller
     INNER JOIN etat ON etat.id = livre.etat
-    ORDER BY livre.id DESC";
+    ORDER BY livre.id DESC
+    LIMIT 5";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -27,11 +30,7 @@ try {
 }
 
 
-
-
 ?>
-
-
 
 
 
@@ -45,31 +44,22 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-
 </head>
-<body class="">
+<body>
+
 
 <?php include_once('../../composant/header.php'); ?>
+<main>
 
-    <main>
-   
-    <section id="hero" class="relative w-full h-screen flex items-center justify-center">
-        
-        <img src="../../assets/images/slogan.jng" alt="Slogan" class="absolute inset-0 w-full h-full object-cover object-center">
-
-        
-        <div class="absolute text-center text-black px-6 sm:px-8 lg:px-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
-             style="font-family: 'Caveat', cursive; line-height: 1.2; max-width: 90%;">
-            <p class="whitespace-pre-wrap break-words font-Titre">
-                 BookMarket<br>l'occasion devient le <br>neuf
-            </p>
-        </div>
-    </section>
-    <h2 class="text-2xl  text-center mb-6 font-Titre">
-    Nos derniers produits
-</h2>
 <section class="bg-[#FFB703] text-center">
+
+<?php 
+
+if(isset($_GET['delete']) && $_GET['delete'] == 1){
+    echo "<p class='text-white text-2xl'>L'annonce a bien été supprimée</p>";
+}
+
+?>
 
 <?php 
 
@@ -85,7 +75,6 @@ foreach ($livres as $livre){
 
 
 <article class="border-b-2 border-black pb-4 pt-4 flex items-center flex-col">
-<a href="../detail/detail.php?numéro=<?= $livre['id'] ?>">
 <img src="../<?= $livre["url_image"] ?>" alt="Image d'un livre">
 <h3 class="text-xl font-Titre">
    Titre : <?= $livre['titre'] ?>
@@ -99,7 +88,7 @@ Etat du livre : <?= $livre['etat'] ?>
 <h3 class="text-xl font-Titre">
    Vendeur : <?= $livre['user_nom'] ?>
 </h3>
-</a>
+
 <button class="flex items-center justify-center bg-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-blue-600 transition duration-300">
         <span class="text-lg mr-4"><?= $prix  ?>€</span>
 
@@ -107,6 +96,10 @@ Etat du livre : <?= $livre['etat'] ?>
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18l-1 9H4l-1-9zm4 0v0a1 1 0 1 1 2 0v0a1 1 0 1 1-2 0zM9 14h6m2 0h2v2H7v-2h2m10-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-5-7H6" />
         </svg>
+        <form action="../../process/deleteDP.php" method="post" >
+            <input type="hidden" name="id" value="<?= $livre['id'] ?>">
+            <button class="bg-red-600 mt-4 text-white px-6 py-2 rounded-lg hover:bg-[#e7bc52] focus:outline-none focus:ring-2 focus:ring-red-500" type="submit">Supprimer l'annonce</button>
+        </form>
 
 
     </button>
@@ -126,12 +119,8 @@ Etat du livre : <?= $livre['etat'] ?>
 
 
 
-<?php include_once('../../composant/footer.php'); ?>
 
-
-
-
-
+<?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
 
 
 </main>

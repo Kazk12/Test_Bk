@@ -66,6 +66,17 @@ catch (PDOException $error) {
             <div class="bg-white p-8 rounded-lg shadow-lg w-96 my-14">
                 <h2 class="text-2xl font-semibold text-center mb-6">Création de votre annonce</h2>
 
+                <?php if (isset($_GET['error'])) {
+                    if ($_GET['error'] == 'price') {
+                        echo "<p class='text-red-500 text-center'>Le format du prix est 10,00, il faut une virgule</p>";
+                    }
+                } ?>
+                <?php if (isset($_GET['error'])) {
+                    if ($_GET['error'] == 'two_decimal_places') {
+                        echo "<p class='text-red-500 text-center'>Le format du prix est 10,00, il faut deux chiffres après la virgule</p>";
+                    }
+                } ?>
+
 
                 <form action="../../process/ajoutAnnonce.php" method="post" enctype="multipart/form-data">
                     <div class="mb-4">
@@ -126,7 +137,7 @@ catch (PDOException $error) {
 
                     <div class="mb-6">
                         <label for="prix" class="block text-sm font-medium text-gray-700">Mettez le prix du livre</label>
-                        <input type="number" name="prix" id="prix" placeholder="Le prix de votre livre" min="0" step="0.01" required
+                        <input type="text" name="prix" id="prix" placeholder="20,20" min="0" step="0.01" required
                             class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 

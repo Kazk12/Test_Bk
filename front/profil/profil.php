@@ -65,7 +65,7 @@ if (!isset($_SESSION['user'])) {
 
 <?php 
 
-if ($role == 1 || $role == 2) {
+if ( $role == 2) {
 
 ?>
 <section>
@@ -147,6 +147,63 @@ if ($role == 1 || $role == 2) {
 
 <?php } ?>
 
+<?php 
+if ( $role == 1) {
+
+?>
+
+
+
+<section>
+
+<h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
+    Gérer les demandes
+</h2>
+
+    <a href="../devenirVendeur/devenirVendeur.php">
+<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
+    <p>
+        Demande pour devenir vendeur
+    </p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
+    </svg>
+</div>
+</a>
+
+<a href="../annoncesDP/annoncesDP.php">
+
+<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+    <p>
+       Modérer les annonces
+    </p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
+    </svg>
+</div>
+</a>
+
+<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+    <p>
+        Modérer les utilisateurs
+    </p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
+    </svg>
+</div>
+
+
+</section>
+
+
+<?php 
+
+}
+
+?>
 <!-- HISTORIQUE D'ACHAT -->
 
 <section>

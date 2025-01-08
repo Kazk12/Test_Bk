@@ -8,10 +8,16 @@
             </button>
         </div>
 
-     
-        <div class="flex-1 text-center">
-            <span class="text-2xl font-bold text-gray-800" style="font-family: 'Caveat', cursive;">BookMarket</span>
+
+     <div class="flex-1 text-center">
+     <a href="../accueil/accueil.php">
+
+            <span class="text-2xl font-bold text-gray-800 font-logo" >BookMarket</span>
+     </a>
+        
         </div>
+
+        
 
         
         <div class="relative">
