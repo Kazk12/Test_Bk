@@ -80,46 +80,43 @@ try {
 
     <main>
 
+        <section class="flex flex-col md:flex-row items-center justify-center gap-4 mt-6 pl-6 pr-6">
 
-        <section class="flex items-center justify-center  gap-4 mt-6 pl-6 pr-6">
-
-            <article class="flex flex-col items-center gap-4   w-[30%]">
-                <img class="" src="../<?= $livre["url_image"]  ?>" alt="PP DU LIVRE">
+            <article class="flex flex-col items-center gap-4 w-full md:w-[30%]">
+                <img class="w-full" src="../<?= $livre["url_image"] ?>" alt="PP DU LIVRE">
                 <p>
-                    Vendeur : <?= $livre["user_nom"]  ?>
+                    Vendeur : <?= $livre["user_nom"] ?>
                 </p>
                 <p>
-                    Etat du livre : <?= $livre["etat"]  ?>
+                    Etat du livre : <?= $livre["etat"] ?>
                 </p>
             </article>
 
-            <article class="bg-[#26B6D9] p-6  w-[60%]  rounded-lg flex flex-col gap-4 items-center">
+            <article class="bg-[#26B6D9] p-6 w-full md:w-[60%] rounded-lg flex flex-col gap-4 items-center">
 
-                <h2>
-                    Titre :<?= $livre["titre"]  ?>
+                <h2 class="text-center">
+                    Titre : <?= $livre["titre"] ?>
                 </h2>
 
-                <p>
-                    <?= $livre["description_longue"]  ?>
+                <p class="text-center">
+                    <?= $livre["description_longue"] ?>
                 </p>
 
-                <p>
+                <p class="text-center">
                     Prix : <?= $prix ?>€
                 </p>
 
                 <button class="flex items-center justify-center bg-[#FFB703] text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-blue-600 transition duration-300">
                     <span class="text-lg mr-4">Ajouter au panier</span>
 
-
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18l-1 9H4l-1-9zm4 0v0a1 1 0 1 1 2 0v0a1 1 0 1 1-2 0zM9 14h6m2 0h2v2H7v-2h2m10-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-5-7H6" />
                     </svg>
 
-
                 </button>
 
-
             </article>
+        </section>
 
         </section>
 
