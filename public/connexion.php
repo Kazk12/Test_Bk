@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="./assets/style/output.css">
+    <link rel="stylesheet" href="./styles/style/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <main>
@@ -22,7 +23,7 @@
         ?>
         
         
-        <form action="./process/connexion.php" method="post">
+        <form action="./process/process_connexion.php" method="post">
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Vôtre email</label>
                 <input type="email" name="user_email" id="email" placeholder="Vôtre email" required 
