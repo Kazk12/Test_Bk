@@ -37,15 +37,10 @@ if ($checkHeros && !password_verify($sanitizedData['user_password'], $checkHeros
    } else {
    
     session_start();
+
+    
    
-     $_SESSION['user'] = [
-        'id' => $checkHeros->getId(),
-        'nom' => $checkHeros->getNom(),
-        'prenom' => $checkHeros->getPrenom(),
-        'email' => $checkHeros->getEmail(),
-        'tel' => $checkHeros->getTel(),
-        'role' => $checkHeros->getRole(),
-    ];
+     $_SESSION['user'] = $checkHeros;
     
     }
 

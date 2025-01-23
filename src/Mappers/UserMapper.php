@@ -21,18 +21,16 @@ class UserMapper {
     }
 
 
-    public static function mapToArray(User $user)
+    public static function mapToArray(User $user): array
     {
         return [
-            'nom' => $user->getNom(),
-            'prenom' => $user->getPrenom(),
-            'email' => $user->getEmail(),
-            'tel' => $user->getTel(),
-            'description' => $user->getDescription(),
+            'user_nom' => $user->getNom(),
+            'user_prenom' => $user->getPrenom(),
+            'user_email' => $user->getEmail(),
+            'user_tel' => $user->getTel(),
+            'user_description' => $user->getDescription(),
+            'user_password' => $user->getPassword(),
             'role' => $user->getRole(),
-            'password' => $user->getPassword(),
         ];
     }
-
-    
 }

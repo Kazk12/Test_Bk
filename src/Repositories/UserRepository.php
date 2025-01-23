@@ -43,37 +43,39 @@ final class UserRepository extends AbstractRepository
 
     public function findAll(): array
     {
-        $sql = "SELECT * FROM heros";
+        $sql = "SELECT * FROM users";
         $stmt = $this->pdo->query($sql);
-        $heroDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $userDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $heroes = [];
+        $users = [];
 
-        foreach($heroDatas as $heroData){
-            $heroes[] = HerosMapper::mapToObject($heroData);
+        foreach($userDatas as $userData){
+            $users[] = UserMapper::mapToObject($userData);
         }
 
-        return $heroes;
+        return $users;
     }
 
 
-    public function create(Heros $hero): void
+    public function create(User $user): void
     {
-        $sql = "INSERT INTO heros (pseudo, pv, attaque, level) VALUES (:pseudo, :pv, :attaque, :level)";
+        $sql = "INSERT INTO users (user_email, user_nom, user_prenom, user_tel, user_description, user_password, role) VALUES (:user_email, :user_nom, :user_prenom, :user_tel, :user_description, :user_password, :role)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(
-            HerosMapper::mapToArray($hero)
+        $stmt->execute(UserMapper::mapToArray($user)
         );
     }
+  
 
 
-    public function updateHp(Heros $hero): void
+    public function updateGeneralInfo(User $user): void
     {
-        $sql = "UPDATE heros SET pv = :pv WHERE id = :id";
+        $sql = "UPDATE users SET (user_email = :user_email, user_nom = :user_nom, user_prenom = :user_prenom, user_tel = :user_tel ) WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            'id' => $hero->getId(),
-            'pv' => $hero->getPv()
+            'id' => $user->getId(),
+            'user_email' => $user->getEmail(),
+            'user_nom' => $user->getNom(),
+            'user_prenom' => $user->getPrenom(),
         ]
         );
     }

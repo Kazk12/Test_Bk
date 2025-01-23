@@ -26,8 +26,6 @@ $validator->addStrategy('user_tel', new StringValidator(30));
 $validator->addStrategy('role', new RequiredValidator());
 $validator->addStrategy('role', new IntegerValidator());
 
-
-
 $validator->addStrategy('user_password', new RequiredValidator());
 $validator->addStrategy('user_password', new StringValidator(30));
 
@@ -49,8 +47,6 @@ if (!$validator->validate($_POST)) {
 }
 
 
-var_dump($_POST);
-die();
 
 
 function formatPhoneNumber($phone) {
@@ -77,4 +73,50 @@ if ($user_tel === false) {
 }
 
 
-var_dump($user_tel);
+$user_email = $sanitizedData['user_email'];
+$user_nom = $sanitizedData['user_nom'];
+$user_prenom = $sanitizedData['user_prenom'];
+$user_role = $sanitizedData['role'];
+$user_password = $sanitizedData['user_password'];
+
+$hash = password_hash($user_password, PASSWORD_DEFAULT);
+
+
+
+
+$userRepository = new UserRepository();
+
+$checkUser = $userRepository -> findByEmail($sanitizedData['user_email']);
+
+
+
+if($checkUser) {
+    header("Location: ../index.php?error=Email");
+    exit;
+}
+
+
+
+$newUser = new User($user_nom, $user_prenom, $user_email, $user_tel, '', 3, $hash);
+
+
+
+$userRepository->create($newUser);
+
+$UserInfo = $userRepository -> findByEmail($user_email);
+
+
+
+
+
+
+
+
+session_start();
+
+$_SESSION['user'] = $UserInfo;
+
+
+
+header('Location: ../accueil.php');
+exit;

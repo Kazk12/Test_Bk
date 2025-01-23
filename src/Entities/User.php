@@ -9,6 +9,7 @@ class User{
     private string $description;
     private int $role;
     private string $password;
+    private detail_professionnel $detail_professionnel;
 
 
     public function __construct(string $nom , string $prenom , string $email, string $tel, string $description, int $role, string $password, int $id = 0)

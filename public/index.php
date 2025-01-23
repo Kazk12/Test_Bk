@@ -20,6 +20,12 @@
         }
         
         ?>
+        <?php  
+        if(isset($_GET['errorTel'])) {
+            echo "<p class='text-red-500 text-center mb-4'>Le format du téléphone est : 00 00 00 00 00.</p>";
+        }
+        
+        ?>
         
        
         <form action="./process/process_inscription.php" method="post">

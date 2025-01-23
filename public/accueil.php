@@ -1,33 +1,40 @@
 <?php 
-session_start();
+
 include_once '../utils/autoload.php';
+session_start();
+
 // var_dump($_SESSION);
 
 if (!isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: ./index.php');
     exit;
 }
 
 var_dump($_SESSION);
-die();
+
+$allBooks = new livreRepository();
+
+$livres = $allBooks->findAll();
 
 
-try {
-    $sql = "SELECT livre.prix,livre.id_seller, livre.id, livre.description_courte, livre.titre, livre.url_image, etat.etat, users.user_nom
-     FROM `livre`
-    INNER JOIN users ON users.id = livre.id_seller
-    INNER JOIN etat ON etat.id = livre.etat
-    ORDER BY livre.id DESC";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// try {
+//     $sql = "SELECT livre.prix,livre.id_seller, livre.id, livre.description_courte, livre.titre, livre.url_image, etat.etat, users.user_nom
+//      FROM `livre`
+//     INNER JOIN users ON users.id = livre.id_seller
+//     INNER JOIN etat ON etat.id = livre.etat
+//     ORDER BY livre.id DESC";
+
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute();
+//     $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
      
     
     
-} catch (PDOException $e) {
-    echo "Erreur de base de données : " . $e->getMessage();
-}
+// } catch (PDOException $e) {
+//     echo "Erreur de base de données : " . $e->getMessage();
+// }
 
 
 
@@ -49,17 +56,19 @@ try {
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 
 </head>
 <body class="">
 
-<?php include_once('../../composant/header.php'); ?>
+<?php include_once('./assets/composant/header.php'); ?>
 
     <main>
    
     <section id="hero" class="relative w-full h-screen flex items-center justify-center">
         
-        <img src="../../assets/images/slogan.jng" alt="Slogan" class="absolute inset-0 w-full h-full object-cover object-center">
+        <img src="./assets/images/slogan.jng" alt="Slogan" class="absolute inset-0 w-full h-full object-cover object-center">
 
         
         <div class="absolute text-center text-black px-6 sm:px-8 lg:px-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
@@ -78,9 +87,9 @@ try {
 
 foreach ($livres as $livre){
 
-    $prix_en_euros = $livre["prix"] / 100;
+    $prix_en_euros = $livre->getPrix() / 100;
     $prix = number_format($prix_en_euros, 2, ',', ' ');
-    $_SESSION['id_seller'] = $livre['id_seller'];
+    $_SESSION['id_seller'] = $livre->getId_seller();
    
     ?>
 
@@ -88,19 +97,19 @@ foreach ($livres as $livre){
 
 
 <article class="border-b-2 border-black pb-4 pt-4 flex items-center flex-col">
-<a href="../detail/detail.php?numéro=<?= $livre['id'] ?>">
-<img src="../<?= $livre["url_image"] ?>" alt="Image d'un livre">
+<a href="./detail.php?numéro=<?= $livre->getId() ?>">
+<img src="./<?= $livre->getUrl_image() ?>" alt="Image d'un livre">
 <h3 class="text-xl font-Titre">
-   Titre : <?= $livre['titre'] ?>
+   Titre : <?= $livre->getTitre() ?>
 </h3>
 <p class="">
-Etat du livre : <?= $livre['etat'] ?>
+Etat du livre : <?= $livre->getEtat() ?>
 </p>
 <p>
-    <?= $livre['description_courte'] ?>
+    <?= $livre->getDescription_courte() ?>
 </p>
 <h3 class="text-xl font-Titre">
-   Vendeur : <?= $livre['user_nom'] ?>
+   Vendeur : <?= $livre->getId_seller() ?>
 </h3>
 </a>
 <button class="flex items-center justify-center bg-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-blue-600 transition duration-300">
@@ -129,7 +138,7 @@ Etat du livre : <?= $livre['etat'] ?>
 
 
 
-<?php include_once('../../composant/footer.php'); ?>
+<?php include_once('./assets/composant/footer.php'); ?>
 
 
 

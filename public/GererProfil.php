@@ -1,8 +1,12 @@
 <?php 
 
+include_once '../utils/autoload.php';
+
+
 session_start();
 
 
+var_dump($_SESSION['user']->getId());
 
 
 ?>
@@ -19,10 +23,12 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
 
-<?php include_once('../../composant/header.php'); ?>
+<?php include_once('./assets/composant/header.php'); ?>
 
 <main>
 
@@ -33,10 +39,10 @@ session_start();
 
 <section class="mt-4">
     <div class="flex gap-4 my-4">
-        <img src="../../assets/images/Tsuna.jpg" alt="PP Utilisateur" class="rounded-full h-20 w-20">
+        <img src="./assets/images/Tsuna.jpg" alt="PP Utilisateur" class="rounded-full h-20 w-20">
         <div>
             <h2>
-                <?= $_SESSION['user']['nom']; ?>
+                <?= $_SESSION['user']->getNom(); ?>
             </h2>
             <form action="submit.php" method="POST">
     <textarea id="description" name="description" rows="2" cols="50" placeholder="Écrivez votre description ici..."></textarea><br>
@@ -44,7 +50,7 @@ session_start();
 
         </div>
     </div>
-    <form action="../../process/changerProfil.php" method="POST" class="space-y-6">
+    <form action="./process/process_changerProfil.php" method="POST" class="space-y-6">
     <?php  
         if(isset($_GET['error'])) {
             echo "<p class='text-red-500 text-center mb-4'>Veuillez à remplir tous les champs.</p>";
@@ -55,19 +61,19 @@ session_start();
    
         <div class="w-[48%]">
             <label for="nom" class="block">Nom</label>
-            <input type="text" name="user_nom" id="nom" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['nom']; ?>">
+            <input type="text" name="user_nom" id="nom" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']->getNom(); ?>">
         </div>
         <div class="w-[48%]">
             <label for="prenom" class="block">Prénom</label>
-            <input type="text" name="user_prenom" id="prenom" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['prenom']; ?>">
+            <input type="text" name="user_prenom" id="prenom" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']->getPrenom(); ?>">
         </div>
         <div class="w-[48%]">
             <label for="email" class="block">Email</label>
-            <input type="email" name="user_email" id="email" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['email']; ?>">
+            <input type="email" name="user_email" id="email" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']->getEmail(); ?>">
         </div>
         <div class="w-[48%]">
             <label for="tel" class="block">Téléphone</label>
-            <input type="tel" name="user_tel" id="tel" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']['tel']; ?>">
+            <input type="tel" name="user_tel" id="tel" class="w-full p-2 border border-gray-300 rounded-md mt-1" value="<?= $_SESSION['user']->getTel(); ?>">
         </div>
     </div>
 
@@ -131,7 +137,7 @@ session_start();
 
 
 
-<?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
+<?php include_once('./assets/composant/footer.php'); ?>
 
 
 

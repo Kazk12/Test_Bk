@@ -1,12 +1,21 @@
 <?php 
 
-session_start();
-require_once '../../connect/connectDB.php';
+include_once '../utils/autoload.php';
 
-$role = $_SESSION['user']['role'];
+
+session_start();
+
+
+
+
+
+
+
+
+$role = $_SESSION['user']->getRole();
 
 if (!isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: ./index.php');
     exit;
 }
 
@@ -29,12 +38,14 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
-    <script defer type="module" src="../../assets/js/changerProfil.js"></script>
+    <script defer type="module" src="./assets/js/changerProfil.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
 
 
-<?php include_once('../../composant/header.php'); ?>
+<?php include_once('./assets/composant/header.php'); ?>
 
 
 
@@ -46,11 +57,11 @@ if (!isset($_SESSION['user'])) {
 
 <section class="flex flex-col items-center">
 
-<img src="../../assets/images/Tsuna.jpg" alt="Photo de l'utilisateur" class="rounded-full w-20 h-20 object-cover">
+<img src="./assets/images/Tsuna.jpg" alt="Photo de l'utilisateur" class="rounded-full w-20 h-20 object-cover">
 <button  id="changerProfilBtn"  class="bg-[#FFB703] text-white px-6 py-2 rounded-lg hover:bg-[#e7bc52] focus:outline-none focus:ring-2 focus:ring-red-500">
         Changer le profil
     </button>
-<form action="../../process/deconnexion.php" method="post">
+<form action="./process/process_deconnexion.php" method="post">
 <button name="deconnexionBtn" id="deconnexionBtn" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
         Déconnexion
     </button>
@@ -65,7 +76,7 @@ if (!isset($_SESSION['user'])) {
 
 <?php 
 
-if ( $role == 2) {
+if ( $role == 2) :
 
 ?>
 <section>
@@ -73,7 +84,7 @@ if ( $role == 2) {
 <h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
     Gérer ses annonces
 </h2>
-<a href="../ajoutAnnonce/ajout.php">
+<a href="./ajout.php">
 <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
     <p>
         Ajouter une annonce 
@@ -145,10 +156,10 @@ if ( $role == 2) {
 </section>
 
 
-<?php } ?>
+<?php endif ?>
 
 <?php 
-if ( $role == 1) {
+if ( $role == 1) :
 
 ?>
 
@@ -160,7 +171,7 @@ if ( $role == 1) {
     Gérer les demandes
 </h2>
 
-    <a href="../devenirVendeur/devenirVendeur.php">
+    <a href="./devenirVendeur.php">
 <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
     <p>
         Demande pour devenir vendeur
@@ -172,7 +183,7 @@ if ( $role == 1) {
 </div>
 </a>
 
-<a href="../annoncesDP/annoncesDP.php">
+<a href="./annoncesDP.php">
 
 <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
     <p>
@@ -201,7 +212,7 @@ if ( $role == 1) {
 
 <?php 
 
-}
+endif
 
 ?>
 <!-- HISTORIQUE D'ACHAT -->
@@ -214,7 +225,7 @@ if ( $role == 1) {
 
 </section>
 
-<?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
+<?php include_once('./assets/composant/footer.php'); ?>
 
 
 </main>
