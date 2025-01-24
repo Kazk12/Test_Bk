@@ -10,7 +10,7 @@ class Database {
         if (self::$instance === null) {
 
             $host = "localhost";
-            $dbname = "bookmarket";
+            $dbname = "bk";
             $login = "root";
             $password = "";
 

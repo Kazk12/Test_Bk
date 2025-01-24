@@ -2,9 +2,13 @@
 
 final class UserRepository extends AbstractRepository
 {
+
+    private DetailProfessionnelRepository $detailProRepo;
+
     public function __construct()
     {
         parent::__construct();
+        $this->detailProRepo = new DetailProfessionnelRepository();
     }
 
 
@@ -19,6 +23,8 @@ final class UserRepository extends AbstractRepository
         if(!$userData) {
             return null;
         }
+
+        $userData = $this->getDetailProOfUser($userData);
 
         return UserMapper::mapToObject($userData);
     }
@@ -36,6 +42,8 @@ final class UserRepository extends AbstractRepository
             return null;
         }
 
+        $userData = $this->getDetailProOfUser($userData);
+
         return UserMapper::mapToObject($userData);
     }
 
@@ -50,21 +58,39 @@ final class UserRepository extends AbstractRepository
         $users = [];
 
         foreach($userDatas as $userData){
+            $userData = $this->getDetailProOfUser($userData);
             $users[] = UserMapper::mapToObject($userData);
         }
+
+        
 
         return $users;
     }
 
 
-    public function create(User $user): void
+    public function create(User $user): User
     {
-        $sql = "INSERT INTO users (user_email, user_nom, user_prenom, user_tel, user_description, user_password, role) VALUES (:user_email, :user_nom, :user_prenom, :user_tel, :user_description, :user_password, :role)";
+        $sql = "INSERT INTO users (user_email, user_nom, user_prenom, user_tel, user_description, user_password, role, detail_professionnelID) VALUES (:user_email, :user_nom, :user_prenom, :user_tel, :user_description, :user_password, :role, :detail_professionnelID)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(UserMapper::mapToArray($user)
-        );
+        $stmt->execute(UserMapper::mapToArray($user));
+
+        $id = $this->pdo->lastInsertId();
+
+        $user->setId($id);
+
+        return $user;
+
     }
   
+
+    private function getDetailProOfUser(array $userData): array
+    {
+        if($userData['detail_professionnelID']){
+            $userData['detail_professionnelID'] = $this->detailProRepo->findById($userData['detail_professionnelID']);
+        }
+
+        return $userData;
+    }
 
 
     public function updateGeneralInfo(User $user): void
@@ -72,25 +98,17 @@ final class UserRepository extends AbstractRepository
         $sql = "UPDATE users SET (user_email = :user_email, user_nom = :user_nom, user_prenom = :user_prenom, user_tel = :user_tel ) WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            'id' => $user->getId(),
-            'user_email' => $user->getEmail(),
-            'user_nom' => $user->getNom(),
-            'user_prenom' => $user->getPrenom(),
+            ':id' => $user->getId(),
+            ':user_email' => $user->getEmail(),
+            ':user_nom' => $user->getNom(),
+            ':user_prenom' => $user->getPrenom(),
+            ':user_tel' => $user->getTel(),
         ]
         );
     }
 
 
-    public function updateLevel(Heros $hero): void
-    {
-        $sql = "UPDATE heros SET pv = :pv, attaque = :attaque, level = :level WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            'id' => $hero->getId(),
-            'pv' => $hero->getPv(),
-            'attaque' => $hero->getAttaque(),
-            'level' => $hero->getLevel(),
-        ]
-        );
-    }
+    
+
+    
 }

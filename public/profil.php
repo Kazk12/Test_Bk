@@ -1,9 +1,11 @@
-<?php 
+<?php
 
 include_once '../utils/autoload.php';
 
 
 session_start();
+
+
 
 
 
@@ -33,6 +35,7 @@ if (!isset($_SESSION['user'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,194 +45,196 @@ if (!isset($_SESSION['user'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
+
 <body>
 
 
-<?php include_once('./assets/composant/header.php'); ?>
+    <?php include_once('./assets/composant/header.php'); ?>
 
 
 
-<main>
+    <main>
 
 
-<!-- PP MODIFIER PROFIL DECO -->
+        <!-- PP MODIFIER PROFIL DECO -->
 
 
-<section class="flex flex-col items-center">
+        <section class="flex flex-col items-center">
 
-<img src="./assets/images/Tsuna.jpg" alt="Photo de l'utilisateur" class="rounded-full w-20 h-20 object-cover">
-<button  id="changerProfilBtn"  class="bg-[#FFB703] text-white px-6 py-2 rounded-lg hover:bg-[#e7bc52] focus:outline-none focus:ring-2 focus:ring-red-500">
-        Changer le profil
-    </button>
-<form action="./process/process_deconnexion.php" method="post">
-<button name="deconnexionBtn" id="deconnexionBtn" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-        Déconnexion
-    </button>
-</form> 
+            <img src="./assets/images/Tsuna.jpg" alt="Photo de l'utilisateur" class="rounded-full w-20 h-20 object-cover">
+            <button id="changerProfilBtn" class="bg-[#FFB703] text-white px-6 py-2 rounded-lg hover:bg-[#e7bc52] focus:outline-none focus:ring-2 focus:ring-red-500">
+                Changer le profil
+            </button>
+            <form action="./process/process_deconnexion.php" method="post">
+                <button name="deconnexionBtn" id="deconnexionBtn" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    Déconnexion
+                </button>
+            </form>
 
 
 
-</section>
+        </section>
 
 
-<!-- GERER SES ANNONCES -->
+        <!-- GERER SES ANNONCES -->
 
-<?php 
+        <?php
 
-if ( $role == 2) :
+        if ($role == 2) :
 
-?>
-<section>
+        ?>
+            <section>
 
-<h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
-    Gérer ses annonces
-</h2>
-<a href="./ajout.php">
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
-    <p>
-        Ajouter une annonce 
-    </p>
+                <h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
+                    Gérer ses annonces
+                </h2>
+                <a href="./ajout.php">
+                    <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
+                        <p>
+                            Ajouter une annonce
+                        </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
-</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                        </svg>
+                    </div>
+                </a>
 
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
-    <p>
-        Modifier une annonce
-    </p>
+                <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+                    <p>
+                        Modifier une annonce
+                    </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                    </svg>
+                </div>
 
 
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
-    <p>
-        Supprimer une annonce
-    </p>
+                <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+                    <p>
+                        Supprimer une annonce
+                    </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                    </svg>
+                </div>
 
 
-</section>
+            </section>
 
 
-<!-- GERER LES DEMANDES DE CLIENTS -->
+            <!-- GERER LES DEMANDES DE CLIENTS -->
 
 
-<section>
+            <section>
 
-<h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
-    Gérer les demandes des clients
-</h2>
+                <h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
+                    Gérer les demandes des clients
+                </h2>
 
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
-    <p>
-        Reçu
-    </p>
+                <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
+                    <p>
+                        Reçu
+                    </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                    </svg>
+                </div>
 
 
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
-    <p>
-        Envoyer
-    </p>
+                <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+                    <p>
+                        Envoyer
+                    </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                    </svg>
+                </div>
 
 
 
-</section>
+            </section>
 
 
-<?php endif ?>
+        <?php endif ?>
 
-<?php 
-if ( $role == 1) :
+        <?php
+        if ($role == 1) :
 
-?>
+        ?>
 
 
 
-<section>
+            <section>
 
-<h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
-    Gérer les demandes
-</h2>
+                <h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
+                    Gérer les demandes
+                </h2>
 
-    <a href="./devenirVendeur.php">
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
-    <p>
-        Demande pour devenir vendeur
-    </p>
+                <a href="./devenirVendeur.php">
+                    <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 my-4">
+                        <p>
+                            Demande pour devenir vendeur
+                        </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
-</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                        </svg>
+                    </div>
+                </a>
 
-<a href="./annoncesDP.php">
+                <a href="./annoncesDP.php">
 
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
-    <p>
-       Modérer les annonces
-    </p>
+                    <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+                        <p>
+                            Modérer les annonces
+                        </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
-</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                        </svg>
+                    </div>
+                </a>
 
-<div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
-    <p>
-        Modérer les utilisateurs
-    </p>
+                <div class="flex bg-[#FFB703] opacity-65 justify-between px-4 mb-4">
+                    <p>
+                        Modérer les utilisateurs
+                    </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5"/>
-    </svg>
-</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-5-5m5 5l-5 5" />
+                    </svg>
+                </div>
 
 
-</section>
+            </section>
 
 
-<?php 
+        <?php
 
-endif
+        endif
 
-?>
-<!-- HISTORIQUE D'ACHAT -->
+        ?>
+        <!-- HISTORIQUE D'ACHAT -->
 
-<section>
+        <section>
 
-<h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
-    Historique d'achat
-</h2>
+            <h2 class="text-center text-2xl font-bold mt-4 bg-gray-400">
+                Historique d'achat
+            </h2>
 
-</section>
+        </section>
 
-<?php include_once('./assets/composant/footer.php'); ?>
+        <?php include_once('./assets/composant/footer.php'); ?>
 
 
-</main>
+    </main>
 
-    
+
 </body>
+
 </html>

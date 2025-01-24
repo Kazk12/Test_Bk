@@ -1,6 +1,6 @@
 <?php
 
-final class livreRepository extends AbstractRepository
+final class LivreRepository extends AbstractRepository
 {
     public function __construct()
     {
@@ -8,7 +8,7 @@ final class livreRepository extends AbstractRepository
     }
 
 
-    public function find(int $id): ?livre
+    public function find(int $id): ?Livre
     {
         $sql = "SELECT * FROM livre WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
@@ -19,7 +19,7 @@ final class livreRepository extends AbstractRepository
             return null;
         }
 
-        return livreMapper::mapToObject($livreData);
+        return LivreMapper::mapToObject($livreData);
     }
 
 
@@ -32,7 +32,7 @@ final class livreRepository extends AbstractRepository
         $livres = [];
 
         foreach($livreDatas as $livreData){
-            $livres[] = livreMapper::mapToObject($livreData);
+            $livres[] = LivreMapper::mapToObject($livreData);
         }
 
         return $livres;

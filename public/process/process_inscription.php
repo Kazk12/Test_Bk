@@ -1,15 +1,9 @@
 <?php
 
-
-
 include_once '../../utils/autoload.php';
 
 
-
 $validator = new ValidatorService();
-
-
-
 
 
 $validator->checkMethods('POST');
@@ -38,24 +32,20 @@ if ($_POST['role'] == 2) {
 
 $sanitizedData = $validator->sanitize($_POST);
 
-
-
 if (!$validator->validate($_POST)) {
 
     header('location: ../home.php');
     return;
 }
 
-
-
-
-function formatPhoneNumber($phone) {
+function formatPhoneNumber($phone)
+{
     $phone = preg_replace('/\D/', '', $phone);
 
     if (strlen($phone) == 10) {
         return $phone;
     } else {
-        return false; 
+        return false;
     }
 }
 
@@ -68,9 +58,10 @@ $user_tel = formatPhoneNumber(trim($sanitizedData['user_tel']));
 
 if ($user_tel === false) {
     header('Location: ../index.php?errorTel=1');
-    echo "Le numéro de téléphone doit être au format 00 00 00 00 00.";
     exit;
 }
+
+
 
 
 $user_email = $sanitizedData['user_email'];
@@ -78,43 +69,41 @@ $user_nom = $sanitizedData['user_nom'];
 $user_prenom = $sanitizedData['user_prenom'];
 $user_role = $sanitizedData['role'];
 $user_password = $sanitizedData['user_password'];
+$adresse_entreprise = $sanitizedData['adresse_entreprise'];
+$nom_entreprise = $sanitizedData['nom_entreprise'];
 
 $hash = password_hash($user_password, PASSWORD_DEFAULT);
 
-
-
-
 $userRepository = new UserRepository();
 
-$checkUser = $userRepository -> findByEmail($sanitizedData['user_email']);
+$checkUser = $userRepository->findByEmail($sanitizedData['user_email']);
 
-
-
-if($checkUser) {
+if ($checkUser) {
     header("Location: ../index.php?error=Email");
     exit;
 }
 
 
 
-$newUser = new User($user_nom, $user_prenom, $user_email, $user_tel, '', 3, $hash);
+$utilisateur = new User($user_nom, $user_prenom, $user_email, $user_tel, $hash);
 
 
+if ($_POST['role']  == 2) {
+    $detailProfessionelRepository = new DetailProfessionnelRepository();
 
-$userRepository->create($newUser);
+    $newDetailProfessionnel = new DetailProfessionnel($adresse_entreprise, $nom_entreprise);
 
-$UserInfo = $userRepository -> findByEmail($user_email);
+    $newDetailProfessionnel = $detailProfessionelRepository->create($newDetailProfessionnel);
 
+    $utilisateur->setDetailProfessionnel($newDetailProfessionnel);
 
+}
 
-
-
-
-
+$utilisateur =  $userRepository->create($utilisateur);
 
 session_start();
 
-$_SESSION['user'] = $UserInfo;
+$_SESSION['user'] = $utilisateur;
 
 
 

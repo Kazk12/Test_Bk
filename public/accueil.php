@@ -3,18 +3,20 @@
 include_once '../utils/autoload.php';
 session_start();
 
-// var_dump($_SESSION);
+
 
 if (!isset($_SESSION['user'])) {
     header('Location: ./index.php');
     exit;
 }
 
-var_dump($_SESSION);
 
-$allBooks = new livreRepository();
+
+$allBooks = new LivreRepository();
 
 $livres = $allBooks->findAll();
+
+
 
 
 

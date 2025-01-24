@@ -38,8 +38,6 @@ if ($checkHeros && !password_verify($sanitizedData['user_password'], $checkHeros
    
     session_start();
 
-    
-   
      $_SESSION['user'] = $checkHeros;
     
     }

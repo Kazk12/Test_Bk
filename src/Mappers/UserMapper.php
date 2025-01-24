@@ -9,12 +9,13 @@ class UserMapper {
         $prenom = $data["user_prenom"];
         $email = $data["user_email"];
         $tel = $data["user_tel"];
+        $detailProfessionnel = $data["detail_professionnelID"];
         $description = $data["user_description"];
         $password = $data["user_password"];
         $role = $data["role"];
 
 
-        $user = new User($nom, $prenom, $email, $tel, $description, $role, $password, $id );
+        $user = new User($nom, $prenom, $email, $tel, $password,  $detailProfessionnel, $description,  $role, $id );
 
     
         return $user;
@@ -31,6 +32,7 @@ class UserMapper {
             'user_description' => $user->getDescription(),
             'user_password' => $user->getPassword(),
             'role' => $user->getRole(),
+            'detail_professionnelID' => $user->getDetailProfessionnel() ? $user->getDetailProfessionnel()->getId() : null,
         ];
     }
 }

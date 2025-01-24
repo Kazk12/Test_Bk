@@ -5,7 +5,7 @@ class livre
 {
     private int $id;
     private int $id_seller;
-    private int $genre;
+ 
     private int $etat;
     private string $url_image;
     private string $titre;
@@ -13,11 +13,11 @@ class livre
     private string $description_longue;
     private int $prix;
 
-    public function __construct(int $id, int $id_seller, int $genre, int $etat, string $url_image, string $titre, string $description_courte, string $description_longue, int $prix)
+    public function __construct(int $id, int $id_seller,  int $etat, string $url_image, string $titre, string $description_courte, string $description_longue, int $prix)
     {
         $this->id = $id;
         $this->id_seller = $id_seller;
-        $this->genre = $genre;
+       
         $this->etat = $etat;
         $this->url_image = $url_image;
         $this->titre = $titre;

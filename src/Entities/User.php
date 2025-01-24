@@ -1,7 +1,7 @@
 <?php
 
 class User{
-    private int $id;
+    private ?int $id;
     private string $nom;
     private string $prenom;
     private string $email;
@@ -9,10 +9,10 @@ class User{
     private string $description;
     private int $role;
     private string $password;
-    private detail_professionnel $detail_professionnel;
+    private ?DetailProfessionnel $detailProfessionnel;
 
 
-    public function __construct(string $nom , string $prenom , string $email, string $tel, string $description, int $role, string $password, int $id = 0)
+    public function __construct(string $nom , string $prenom , string $email, string $tel, string $password, ?DetailProfessionnel $detailProfessionnel = null, ?string $description = '', ?int $role = 3, ?int $id = null)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -21,12 +21,19 @@ class User{
         $this->tel = $tel; 
         $this->description = $description; 
         $this->role = $role;        
-        $this->password = $password;        
+        $this->password = $password;
+        $this->detailProfessionnel = $detailProfessionnel;        
     }
 
     public function getId() : int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
 
 
@@ -107,7 +114,7 @@ class User{
      *
      * @return  self
      */ 
-    public function setRole(int $role)
+    public function setRole(int $role) : self
     {
         $this->role = $role;
 
@@ -119,8 +126,40 @@ class User{
     /**
      * Get the value of description
      */ 
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
+    }
+
+    /**
+     * Set the value of tel
+     *
+     * @return  self
+     */ 
+    public function setTel($tel) : self
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of detailProfessionnel
+     */ 
+    public function getDetailProfessionnel() :?DetailProfessionnel
+    {
+        return $this->detailProfessionnel;
+    }
+
+    /**
+     * Set the value of detailProfessionnel
+     *
+     * @return  self
+     */ 
+    public function setDetailProfessionnel(DetailProfessionnel $detailProfessionnel) : self
+    {
+        $this->detailProfessionnel = $detailProfessionnel;
+
+        return $this;
     }
 }

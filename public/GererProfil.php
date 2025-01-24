@@ -50,13 +50,18 @@ var_dump($_SESSION['user']->getId());
 
         </div>
     </div>
-    <form action="./process/process_changerProfil.php" method="POST" class="space-y-6">
+    <form action="./process/process_updateInfo.php" method="POST" class="space-y-6">
     <?php  
         if(isset($_GET['error'])) {
             echo "<p class='text-red-500 text-center mb-4'>Veuillez à remplir tous les champs.</p>";
         }
         
         ?>
+         <?php
+            if (isset($_GET['errorTel'])) {
+                echo "<p class='text-red-500 text-center mb-4'>Le format du téléphone est : 00 00 00 00 00.</p>";
+            }
+?>
     <div class="flex flex-wrap gap-4 px-4">
    
         <div class="w-[48%]">
