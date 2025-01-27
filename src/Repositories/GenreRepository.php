@@ -16,9 +16,25 @@ final class GenreRepository extends AbstractRepository
         $genres = [];
 
         foreach($genreDatas as $genreData){
-            $genres[] = EtatMapper::mapToObject($genreData);
+            $genres[] = GenreMapper::mapToObject($genreData);
         }
         return $genres;
+    }
+
+  
+
+    public function findById(int $id): ?Genre
+    {
+        $sql = "SELECT * FROM genre WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $genreData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(!$genreData) {
+            return null;
+        }
+
+        return LivreMapper::mapToObject($genreData);
     }
 
 }

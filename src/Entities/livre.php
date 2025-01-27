@@ -4,7 +4,7 @@
 class livre
 {
     private int $id;
-    private int $id_seller;
+    private User $id_seller;
     private Etat $etat;
     private string $url_image;
     private string $titre;
@@ -12,7 +12,9 @@ class livre
     private string $description_longue;
     private int $prix;
 
-    public function __construct(int $id, int $id_seller,  Etat $etat, string $url_image, string $titre, string $description_courte, string $description_longue, int $prix)
+    private array $genres;
+
+    public function __construct( User $id_seller,  Etat $etat, string $url_image, string $titre, string $description_courte, string $description_longue, int $prix, int $id = 0)
     {
         $this->id = $id;
         $this->id_seller = $id_seller;
@@ -35,7 +37,7 @@ class livre
     /**
      * Get the value of id_seller
      */ 
-    public function getId_seller() :int
+    public function getId_seller() :User
     {
         return $this->id_seller;
     }

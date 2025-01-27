@@ -2,7 +2,7 @@
 
 class livreMapper {
 
-    public static function mapToObject(array $data): livre {
+    public static function mapToObject(array $data, array $genres = []): livre {
 
         $id = $data["id"];
         $id_seller = $data["id_seller"];
@@ -14,7 +14,7 @@ class livreMapper {
         $prix = $data["prix"];
 
 
-        $livre = new livre($id, $id_seller,  $etat, $url_image, $titre, $description_courte, $description_longue, $prix);
+        $livre = new livre( $id_seller,  $etat, $url_image, $titre, $description_courte, $description_longue, $prix, $id);
 
     
         return $livre;
@@ -24,7 +24,7 @@ class livreMapper {
     public static function mapToArray(livre $livre): array
     {
         return [
-            'id_seller' => $livre->getId_seller(),
+            'id_seller' => $livre->getId_seller()->getId(),
             'etat' => $livre->getEtat()->getId(),
             'url_image' => $livre->getUrl_image(),
             'titre' => $livre->getTitre(),

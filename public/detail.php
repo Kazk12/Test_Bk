@@ -1,7 +1,6 @@
 <?php
 
-
-require_once('../../connect/connectDB.php');
+include_once '../utils/autoload.php';
 session_start();
 
 if (!isset($_SESSION['user'])) {
@@ -12,44 +11,50 @@ if (!isset($_SESSION['user'])) {
 $id = $_GET['numéro'];
 
 
-try {
-    $sql = "SELECT livre.prix, livre.description_longue, livre.titre, livre.url_image, etat.etat, users.user_nom
-     FROM `livre`
-    INNER JOIN users ON users.id = livre.id_seller
-    INNER JOIN etat ON etat.id = livre.etat
-    WHERE livre.id = :id";
+$livreRepo = new LivreRepository();
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([":id" => $id]);
-    $livre = $stmt->fetch(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Erreur de base de données : " . $e->getMessage();
-}
+$livre = $livreRepo -> findById($id);
 
 
-$prix_en_euros = $livre["prix"] / 100;
+
+// try {
+//     $sql = "SELECT livre.prix, livre.description_longue, livre.titre, livre.url_image, etat.etat, users.user_nom
+//      FROM `livre`
+//     INNER JOIN users ON users.id = livre.id_seller
+//     INNER JOIN etat ON etat.id = livre.etat
+//     WHERE livre.id = :id";
+
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute([":id" => $id]);
+//     $livre = $stmt->fetch(PDO::FETCH_ASSOC);
+// } catch (PDOException $e) {
+//     echo "Erreur de base de données : " . $e->getMessage();
+// }
+
+
+$prix_en_euros = $livre->getPrix() / 100;
 $prix = number_format($prix_en_euros, 2, ',', ' ');
 
+$livres = $livreRepo -> findAllLivreBySellerId($livre->getId_seller()->getId(),$id);
 
 
 
-
-try {
-    $sql = "SELECT livre.prix, livre.titre, livre.url_image
-         FROM `livre`
-        INNER JOIN users ON users.id = livre.id_seller
-        WHERE id_seller = :id_seller
-         AND livre.id != :id_livre
-         LIMIT 3";
+// try {
+//     $sql = "SELECT livre.prix, livre.titre, livre.url_image
+//          FROM `livre`
+//         INNER JOIN users ON users.id = livre.id_seller
+//         WHERE id_seller = :id_seller
+//          AND livre.id != :id_livre
+//          LIMIT 3";
          
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([":id_seller" => $_SESSION['id_seller'],
-        ":id_livre" => $id]);
-    $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Erreur de base de données : " . $e->getMessage();
-}
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute([":id_seller" => $_SESSION['id_seller'],
+//         ":id_livre" => $id]);
+//     $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// } catch (PDOException $e) {
+//     echo "Erreur de base de données : " . $e->getMessage();
+// }
 
 
 
@@ -69,6 +74,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/style/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
 
@@ -76,30 +82,31 @@ try {
 
 
 
-    <?php include_once('../../composant/header.php'); ?>
+<?php include_once('./assets/composant/header.php'); ?>
+
 
     <main>
 
         <section class="flex flex-col md:flex-row items-center justify-center gap-4 mt-6 pl-6 pr-6">
 
             <article class="flex flex-col items-center gap-4 w-full md:w-[30%]">
-                <img class="w-full" src="../<?= $livre["url_image"] ?>" alt="PP DU LIVRE">
+                <img class="w-full" src="<?= $livre->getUrl_image() ?>" alt="PP DU LIVRE">
                 <p>
-                    Vendeur : <?= $livre["user_nom"] ?>
+                    Vendeur : <?= $livre->getId_seller()->getNom() ?>
                 </p>
                 <p>
-                    Etat du livre : <?= $livre["etat"] ?>
+                    Etat du livre : <?= $livre->getEtat()->getEtat() ?>
                 </p>
             </article>
 
             <article class="bg-[#26B6D9] p-6 w-full md:w-[60%] rounded-lg flex flex-col gap-4 items-center">
 
                 <h2 class="text-center">
-                    Titre : <?= $livre["titre"] ?>
+                    Titre : <?= $livre->getTitre() ?>
                 </h2>
 
                 <p class="text-center">
-                    <?= $livre["description_longue"] ?>
+                    <?= $livre->getDescription_longue() ?>
                 </p>
 
                 <p class="text-center">
@@ -164,7 +171,7 @@ $prixLivre = number_format($prixEuros, 2, ',', ' ');
 
 
 
-        <?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
+        <?php include_once('./assets/composant/footer.php'); ?>
 
     </main>
 

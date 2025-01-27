@@ -21,4 +21,19 @@ final class EtatRepository extends AbstractRepository
         return $etats;
     }
 
+
+    public function findById(int $id): ?Etat
+    {
+        $sql = "SELECT * FROM etat WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $etatData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(!$etatData) {
+            return null;
+        }
+
+        return EtatMapper::mapToObject($etatData);
+    }
+
 }

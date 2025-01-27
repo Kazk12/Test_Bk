@@ -17,8 +17,8 @@ class LivreGenreMapper {
     public static function mapToArray(LivreGenre $LivreGenre): array
     {
         return [
-            'id_livre' => $LivreGenre->getIdLivre(),
-            'id_genre' => $LivreGenre->getIdGenre(),
+            'id_livre' => $LivreGenre->getIdLivre()->getId(),
+            'id_genre' => $LivreGenre->getIdGenre()->getId(),
         ];
     }
 

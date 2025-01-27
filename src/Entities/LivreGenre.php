@@ -3,10 +3,10 @@
 abstract class LivreGenre
 {
     private int $id;
-    private int $idLivre;
-    private int $idGenre;
+    private Livre $idLivre;
+    private Genre $idGenre;
 
-    public function __construct(int $id, int $idLivre, int $idGenre)
+    public function __construct(int $id, Livre $idLivre, Genre $idGenre)
     {
         $this->id = $id;
         $this->idLivre = $idLivre;

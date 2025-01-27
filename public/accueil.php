@@ -17,29 +17,6 @@ $allBooks = new LivreRepository();
 $livres = $allBooks->findAll();
 
 
-
-
-
-// try {
-//     $sql = "SELECT livre.prix,livre.id_seller, livre.id, livre.description_courte, livre.titre, livre.url_image, etat.etat, users.user_nom
-//      FROM `livre`
-//     INNER JOIN users ON users.id = livre.id_seller
-//     INNER JOIN etat ON etat.id = livre.etat
-//     ORDER BY livre.id DESC";
-
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->execute();
-//     $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-     
-    
-    
-// } catch (PDOException $e) {
-//     echo "Erreur de base de données : " . $e->getMessage();
-// }
-
-
-
-
 ?>
 
 
@@ -99,18 +76,18 @@ foreach ($livres as $livre){
 
 <article class="border-b-2 border-black pb-4 pt-4 flex items-center flex-col">
 <a href="./detail.php?numéro=<?= $livre->getId() ?>">
-<img src="./<?= $livre->getUrl_image() ?>" alt="Image d'un livre">
+<img src="<?= $livre->getUrl_image() ?>" alt="Image d'un livre">
 <h3 class="text-xl font-Titre">
    Titre : <?= $livre->getTitre() ?>
 </h3>
 <p class="">
-Etat du livre : <?= $livre->getEtat() ?>
+Etat du livre : <?= $livre->getEtat()->getEtat() ?>
 </p>
 <p>
     <?= $livre->getDescription_courte() ?>
 </p>
 <h3 class="text-xl font-Titre">
-   Vendeur : <?= $livre->getId_seller() ?>
+   Vendeur : <?= $livre->getId_seller()->getNom() ?>
 </h3>
 </a>
 <button class="flex items-center justify-center bg-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-blue-600 transition duration-300">

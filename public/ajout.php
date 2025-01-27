@@ -8,34 +8,19 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-// try {
-//     $sql = "SELECT * FROM etat";
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->execute();
-//     $etats = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// }
-// catch (PDOException $error) {
-//         echo "Erreur lors de la requete : " . $error->getMessage();
-//     }
+$etatRepo = new EtatRepository();
+$genreRepo = new GenreRepository();
+$livreRepo = new LivreRepository();
 
 
+$genres = $genreRepo ->findAll();
 
-//     try {
-//         $sql = "SELECT * FROM genre";
-//         $stmt = $pdo->prepare($sql);
-//         $stmt->execute();
-//         $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
-//     }
-//     catch (PDOException $error) {
-//             echo "Erreur lors de la requete : " . $error->getMessage();
-//         }
+
+$tousEtat = $etatRepo->findAll();
+
+// var_dump($tousEtat);
+
     
-
-
-
-
 
 
 ?>
@@ -80,15 +65,21 @@ if (!isset($_SESSION['user'])) {
                     }
                 } ?>
 
+                <?php if (isset($_GET['sucess'])) {
+                    if ($_GET['sucess']) {
+                        echo "<p class='text-green-500 text-center'>Votre annonce a bien été crée</p>";
+                    }
+                } ?>
 
-                <form action="../../process/ajoutAnnonce.php" method="post" enctype="multipart/form-data">
+
+                <form action="./process/process_ajoutAnnonce.php" method="post" enctype="multipart/form-data">
                     <div class="mb-4">
                         <label for="genre" class="block text-sm font-medium text-gray-700">Le genre du livre</label>
                         <select name="genre" id="genre"
                             class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <?php 
                             foreach ($genres as $genre) {
-                                echo "<option value='".$genre['id']."'>".$genre['genre']."</option>";
+                                echo "<option value='".$genre->getId()."'>".$genre->getGenre()."</option>";
                             }
 
 
@@ -101,8 +92,8 @@ if (!isset($_SESSION['user'])) {
                         <select name="etat" id="etat"
                             class="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <?php 
-                            foreach ($etats as $etat) {
-                                echo "<option value='".$etat['id']."'>".$etat['etat']."</option>";
+                            foreach ($tousEtat as $etat) {
+                                echo "<option value='".$etat->getId()."'>".$etat->getEtat()."</option>";
                             }
 
 
