@@ -5,19 +5,17 @@ class livre
 {
     private int $id;
     private int $id_seller;
- 
-    private int $etat;
+    private Etat $etat;
     private string $url_image;
     private string $titre;
     private string $description_courte;
     private string $description_longue;
     private int $prix;
 
-    public function __construct(int $id, int $id_seller,  int $etat, string $url_image, string $titre, string $description_courte, string $description_longue, int $prix)
+    public function __construct(int $id, int $id_seller,  Etat $etat, string $url_image, string $titre, string $description_courte, string $description_longue, int $prix)
     {
         $this->id = $id;
         $this->id_seller = $id_seller;
-       
         $this->etat = $etat;
         $this->url_image = $url_image;
         $this->titre = $titre;
@@ -29,7 +27,7 @@ class livre
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getId() :int
     {
         return $this->id;
     }
@@ -37,23 +35,16 @@ class livre
     /**
      * Get the value of id_seller
      */ 
-    public function getId_seller()
+    public function getId_seller() :int
     {
         return $this->id_seller;
     }
 
-    /**
-     * Get the value of genre
-     */ 
-    public function getGenre()
-    {
-        return $this->genre;
-    }
 
     /**
      * Get the value of etat
      */ 
-    public function getEtat()
+    public function getEtat() :Etat
     {
         return $this->etat;
     }
@@ -61,7 +52,7 @@ class livre
     /**
      * Get the value of url_image
      */ 
-    public function getUrl_image()
+    public function getUrl_image() :string
     {
         return $this->url_image;
     }
@@ -69,7 +60,7 @@ class livre
     /**
      * Get the value of description_courte
      */ 
-    public function getDescription_courte()
+    public function getDescription_courte() :string
     {
         return $this->description_courte;
     }
@@ -77,7 +68,7 @@ class livre
     /**
      * Get the value of titre
      */ 
-    public function getTitre()
+    public function getTitre() :string
     {
         return $this->titre;
     }
@@ -85,7 +76,7 @@ class livre
     /**
      * Get the value of description_longue
      */ 
-    public function getDescription_longue()
+    public function getDescription_longue() :string
     {
         return $this->description_longue;
     }
@@ -93,8 +84,96 @@ class livre
     /**
      * Get the value of prix
      */ 
-    public function getPrix()
+    public function getPrix() :string
     {
         return $this->prix;
+    }
+
+  
+
+    /**
+     * Set the value of id_seller
+     *
+     * @return  self
+     */ 
+    public function setId_seller($id_seller)
+    {
+        $this->id_seller = $id_seller;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Set the value of etat
+     *
+     * @return  self
+     */ 
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of url_image
+     *
+     * @return  self
+     */ 
+    public function setUrl_image($url_image)
+    {
+        $this->url_image = $url_image;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of titre
+     *
+     * @return  self
+     */ 
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of description_courte
+     *
+     * @return  self
+     */ 
+    public function setDescription_courte($description_courte)
+    {
+        $this->description_courte = $description_courte;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of description_longue
+     *
+     * @return  self
+     */ 
+    public function setDescription_longue($description_longue)
+    {
+        $this->description_longue = $description_longue;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of prix
+     *
+     * @return  self
+     */ 
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
     }
 }

@@ -162,4 +162,16 @@ class User{
 
         return $this;
     }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password) : self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

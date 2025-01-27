@@ -1,36 +1,36 @@
 <?php
 
+include_once '../utils/autoload.php';
 session_start();
-require_once '../../connect/connectDB.php';
 
 if (!isset($_SESSION['user'])) {
-    header('Location: ../../index.php');
+    header('Location: ./index.php');
     exit;
 }
 
-try {
-    $sql = "SELECT * FROM etat";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $etats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// try {
+//     $sql = "SELECT * FROM etat";
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute();
+//     $etats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-}
-catch (PDOException $error) {
-        echo "Erreur lors de la requete : " . $error->getMessage();
-    }
+// }
+// catch (PDOException $error) {
+//         echo "Erreur lors de la requete : " . $error->getMessage();
+//     }
 
 
 
-    try {
-        $sql = "SELECT * FROM genre";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     try {
+//         $sql = "SELECT * FROM genre";
+//         $stmt = $pdo->prepare($sql);
+//         $stmt->execute();
+//         $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
   
-    }
-    catch (PDOException $error) {
-            echo "Erreur lors de la requete : " . $error->getMessage();
-        }
+//     }
+//     catch (PDOException $error) {
+//             echo "Erreur lors de la requete : " . $error->getMessage();
+//         }
     
 
 
@@ -54,10 +54,13 @@ catch (PDOException $error) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body>
-    <?php include_once('../../composant/header.php'); ?>
+<?php include_once('./assets/composant/header.php'); ?>
+
 
     <main>
         <section class="bg-gray-100  flex flex-col items-center justify-center h-screen">
@@ -155,7 +158,8 @@ catch (PDOException $error) {
 
 
 
-        <?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
+        <?php include_once('./assets/composant/footer.php'); ?>
+
 
 
     </main>

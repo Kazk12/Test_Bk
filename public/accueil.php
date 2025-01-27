@@ -20,7 +20,6 @@ $livres = $allBooks->findAll();
 
 
 
-
 // try {
 //     $sql = "SELECT livre.prix,livre.id_seller, livre.id, livre.description_courte, livre.titre, livre.url_image, etat.etat, users.user_nom
 //      FROM `livre`

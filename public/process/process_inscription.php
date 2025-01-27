@@ -50,7 +50,6 @@ function formatPhoneNumber($phone)
 }
 
 
-
 $user_tel = formatPhoneNumber(trim($sanitizedData['user_tel']));
 
 
@@ -78,6 +77,8 @@ $userRepository = new UserRepository();
 
 $checkUser = $userRepository->findByEmail($sanitizedData['user_email']);
 
+
+
 if ($checkUser) {
     header("Location: ../index.php?error=Email");
     exit;
@@ -99,6 +100,7 @@ if ($_POST['role']  == 2) {
 
 }
 
+
 $utilisateur =  $userRepository->create($utilisateur);
 
 session_start();
@@ -109,3 +111,4 @@ $_SESSION['user'] = $utilisateur;
 
 header('Location: ../accueil.php');
 exit;
+

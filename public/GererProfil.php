@@ -6,7 +6,8 @@ include_once '../utils/autoload.php';
 session_start();
 
 
-var_dump($_SESSION['user']->getId());
+// var_dump($_SESSION['user']->getId());
+
 
 
 ?>
@@ -103,7 +104,7 @@ var_dump($_SESSION['user']->getId());
 
 
 
-<form action="../../process/changerPassword.php" method="POST" class="space-y-6">
+<form action="./process/process_updatePassword.php" method="POST" class="space-y-6">
 <?php  
         if(isset($_GET['error1'])) {
             echo "<p class='text-red-500 text-center mb-4'>Vôtre nouveau mot de passe ne correspond pas à la confirmation du mot de passe.</p>";

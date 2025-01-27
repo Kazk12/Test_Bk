@@ -61,9 +61,13 @@ $user->setNom($user_nom);
 $user->setPrenom($user_prenom);
 $user->setTel($user_tel);
 
+
+
 $userRepo -> updateGeneralInfo($user);
 
 
-var_dump($user);
-die();
+$_SESSION['user'] = $user;
 
+
+header('Location: ../GererProfil.php');
+exit;

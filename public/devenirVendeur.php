@@ -1,20 +1,9 @@
 <?php
-require_once('../../connect/connectDB.php');
+include_once '../utils/autoload.php';
 
-try {
-    $sql = "SELECT users.user_nom, users.id, users.user_prenom, detail_professionnel.adresse_entreprise, detail_professionnel.nom_entreprise
-FROM `users`
-INNER JOIN detail_professionnel ON detail_professionnel.user_id = users.id
-WHERE role = 3"
-    ;
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $demandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}  catch (PDOException $e) {
-    echo "Erreur de base de données : " . $e->getMessage();
-}
+$userRepo = new UserRepository();
 
-
+$demandes = $userRepo->findAllDemandePro();
 
 
 ?>
@@ -31,10 +20,13 @@ WHERE role = 3"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
     
-<?php include_once('../../composant/header.php'); ?>
+<?php include_once('./assets/composant/header.php'); ?>
+
 <main>
 
 <?php 
@@ -59,25 +51,25 @@ foreach ($demandes as $demande) {
 
     <!-- Informations Utilisateur -->
     <div class="flex flex-col w-full sm:w-[30%] mb-4 sm:mb-0">
-        <p class="text-gray-700 font-semibold text-sm">Le nom : <?= $demande['user_nom'] ?></p>
-        <p class="text-gray-700 font-semibold text-sm">Le prénom : <?= $demande['user_prenom'] ?></p>
+        <p class="text-gray-700 font-semibold text-sm">Le nom : <?= $demande->getNom() ?></p>
+        <p class="text-gray-700 font-semibold text-sm">Le prénom : <?= $demande->getPrenom() ?></p>
     </div>
 
     <!-- Informations sur l'entreprise -->
     <div class="flex flex-col w-full sm:w-[30%] mb-4 sm:mb-0">
-        <p class="text-gray-700 font-semibold text-sm">L'adresse de l'entreprise : <?= $demande['adresse_entreprise'] ?></p>
-        <p class="text-gray-700 font-semibold text-sm">Le nom de l'entreprise : <?= $demande['nom_entreprise'] ?></p>
+        <p class="text-gray-700 font-semibold text-sm">L'adresse de l'entreprise : <?= $demande->getDetailProfessionnel()->getAdresseEntreprise() ?></p>
+        <p class="text-gray-700 font-semibold text-sm">Le nom de l'entreprise : <?= $demande->getDetailProfessionnel()->getNomEntreprise() ?></p>
     </div>
 
     <!-- Formulaire de validation et refus -->
     <div class="flex flex-col w-full sm:w-[30%] space-y-4">
-        <form action="../../process/validerVendeur.php" method="post" class="flex flex-col items-start w-full">
-            <input name="user_id" value="<?= $demande['id'] ?>" type="hidden"></input>
+        <form action="./process/process_validerVendeur.php" method="post" class="flex flex-col items-start w-full">
+            <input name="user_id" value="<?= $demande->getId() ?>" type="hidden"></input>
             <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 transition duration-200 w-full sm:w-auto">Valider</button>
         </form>
         
-        <form action="../../process/deleteAnnonce.php" method="post" class="flex flex-col items-start w-full">
-            <input name="user_id" value="<?= $demande['id'] ?>" type="hidden"></input>
+        <form action="./process/process_refusVendeur.php" method="post" class="flex flex-col items-start w-full">
+            <input name="user_id" value="<?= $demande->getId() ?>" type="hidden"></input>
             <button type="submit" class="bg-red-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-red-600 transition duration-200 w-full sm:w-auto">Refuser</button>
         </form>
     </div>
@@ -98,7 +90,7 @@ foreach ($demandes as $demande) {
 
 
 
-<?php include_once(__DIR__ . '/../../composant/footer.php'); ?>
+<?php include_once('./assets/composant/footer.php'); ?>
 
 </main>
 

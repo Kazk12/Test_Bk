@@ -61,9 +61,22 @@ final class UserRepository extends AbstractRepository
             $userData = $this->getDetailProOfUser($userData);
             $users[] = UserMapper::mapToObject($userData);
         }
+        return $users;
+    }
 
-        
+    
+    public function findAllDemandePro(): array
+    {
+        $sql = "SELECT * FROM `users` WHERE role = 3 AND detail_professionnelID IS NOT NULL";
+        $stmt = $this->pdo->query($sql);
+        $userDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $users = [];
+
+        foreach($userDatas as $userData){
+            $userData = $this->getDetailProOfUser($userData);
+            $users[] = UserMapper::mapToObject($userData);
+        }
         return $users;
     }
 
@@ -92,10 +105,9 @@ final class UserRepository extends AbstractRepository
         return $userData;
     }
 
-
     public function updateGeneralInfo(User $user): void
     {
-        $sql = "UPDATE users SET (user_email = :user_email, user_nom = :user_nom, user_prenom = :user_prenom, user_tel = :user_tel ) WHERE id = :id";
+        $sql = "UPDATE users SET user_email = :user_email, user_nom = :user_nom, user_prenom = :user_prenom, user_tel = :user_tel WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':id' => $user->getId(),
@@ -103,9 +115,37 @@ final class UserRepository extends AbstractRepository
             ':user_nom' => $user->getNom(),
             ':user_prenom' => $user->getPrenom(),
             ':user_tel' => $user->getTel(),
-        ]
-        );
+        ]);
     }
+
+    public function updatePasswordInfo(User $user): void
+    {
+        $sql = "UPDATE users SET user_password = :user_password WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':id' => $user->getId(),
+            ':user_password' => $user->getPassword(),
+            
+        ]);
+    }
+
+    public function updateRoleVendeur(User $user): void
+    {
+        $sql = "UPDATE users SET role = 2 WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':id' => $user->getId(),
+        ]);
+    }
+    public function updateRefusVendeur(User $user): void
+    {
+        $sql = "UPDATE users SET detail_professionnelID = null WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':id' => $user->getId(),
+        ]);
+    }
+    
 
 
     

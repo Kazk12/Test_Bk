@@ -25,7 +25,7 @@ class livreMapper {
     {
         return [
             'id_seller' => $livre->getId_seller(),
-            'etat' => $livre->getEtat(),
+            'etat' => $livre->getEtat()->getId(),
             'url_image' => $livre->getUrl_image(),
             'titre' => $livre->getTitre(),
             'description_courte' => $livre->getDescription_courte(),
