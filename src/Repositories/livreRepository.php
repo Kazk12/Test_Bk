@@ -82,6 +82,7 @@ final class LivreRepository extends AbstractRepository
         $genres = [];
 
         foreach($genreDatas as $genreData){
+            
             $genres[] = GenreMapper::mapToObject($genreData);
         }
         return $genres;
@@ -89,12 +90,12 @@ final class LivreRepository extends AbstractRepository
 
     public function findAllLivreBySellerId(int $idSeller, int $idAnnonce): array
     {
-        $sql = "SELECT livre.prix, livre.titre, livre.url_image
-//          FROM `livre`
-//         INNER JOIN users ON users.id = livre.id_seller
-//         WHERE id_seller = :id_seller
-//          AND livre.id != :id_livre
-//          LIMIT 3";
+        $sql = "SELECT livre.id, livre.id_seller, livre.etat, livre.image, livre.titre, livre.description_courte, livre.description_longue, livre.prix
+          FROM `livre`
+        INNER JOIN users ON users.id = livre.id_seller
+        WHERE id_seller = :id_seller
+         AND livre.id != :id_livre
+         LIMIT 3";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':id_livre' => $idAnnonce,
@@ -106,6 +107,8 @@ final class LivreRepository extends AbstractRepository
         $livres = [];
 
         foreach($livresDatas as $livreData){
+            $livreData = $this->getUser($livreData);
+            $livreData = $this->getEtat($livreData);
             $livres[] = LivreMapper::mapToObject($livreData);
         }
         return $livres;

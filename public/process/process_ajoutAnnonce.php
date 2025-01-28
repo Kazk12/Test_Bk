@@ -15,9 +15,9 @@ $validator->addStrategy('etat', new IntegerValidator());
 $validator->addStrategy('titre', new RequiredValidator());
 $validator->addStrategy('titre', new StringValidator(30));
 $validator->addStrategy('descriptionCourte', new RequiredValidator());
-$validator->addStrategy('descriptionCourte', new StringValidator(50));
+$validator->addStrategy('descriptionCourte', new StringValidator(150));
 $validator->addStrategy('descriptionLongue', new RequiredValidator());
-$validator->addStrategy('descriptionLongue', new StringValidator(200));
+$validator->addStrategy('descriptionLongue', new StringValidator(500));
 $validator->addStrategy('prix', new RequiredValidator());
 
 
