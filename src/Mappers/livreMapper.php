@@ -1,6 +1,6 @@
 <?php
 
-class livreMapper {
+class LivreMapper {
 
     public static function mapToObject(array $data, array $genres = []): livre {
 

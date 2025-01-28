@@ -13,6 +13,7 @@ $id = $_GET['numéro'];
 
 $livreRepo = new LivreRepository();
 
+
 $livre = $livreRepo -> findById($id);
 
 
