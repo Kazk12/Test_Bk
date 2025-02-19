@@ -19,8 +19,8 @@ Ce projet est une application web développée avec PHP en utilisant la programm
 
 ## Fonctionnalités principales
 
-- Fonctionnalité 1 : Pouvoir crée un compte et ce connecter.
-- Fonctionnalité 2 : Pouvoir ajouter une annonce, que les autres utilisateurs puisse voir.
-- Fonctionnalité 3 : L'admin peut gérer le fait que les personnes qui s'inscrivent puisse être des vendeurs dans son site.
-- Fonctionnalité 4 : Pouvoir modifier son compte (les infos de base et le mot de passe).
-- Fonctionnalité 5 : L'admin peut supprimer une annonce/utilisateur.
+- **Fonctionnalité 1** : Pouvoir crée un compte et ce connecter.
+- **Fonctionnalité 2** : Pouvoir ajouter une annonce, que les autres utilisateurs puisse voir.
+- **Fonctionnalité 3** : L'admin peut gérer le fait que les personnes qui s'inscrivent puisse être des vendeurs dans son site.
+- **Fonctionnalité 4** : Pouvoir modifier son compte (les infos de base et le mot de passe).
+- **Fonctionnalité 5** : L'admin peut supprimer une annonce/utilisateur.
