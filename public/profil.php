@@ -21,6 +21,7 @@ $role = $_SESSION['user']->getRole();
     <title>Profil</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
     <script defer type="module" src="./assets/js/changerProfil.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

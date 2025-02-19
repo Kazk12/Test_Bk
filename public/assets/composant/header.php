@@ -29,7 +29,9 @@
 
        
         <div class="relative">
-            <img src="https://via.placeholder.com/40" alt="Panier" class="w-8 h-8">
+        <a href="#" class="text-gray-800 hover:text-gray-600 transition duration-300">
+            <i class="fas fa-shopping-cart text-2xl"></i>
+        </a>
             <!-- <span class="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-1">3</span> Nombre d'articles dans le panier -->
         </div>
     </header>

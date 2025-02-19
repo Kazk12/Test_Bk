@@ -21,6 +21,7 @@ $livres = $allBooks->findAll();
     <title>Accueil - BookMarket</title>
     <link rel="stylesheet" href="../../assets/style/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -29,7 +30,7 @@ $livres = $allBooks->findAll();
 
 <main class="container mx-auto p-4">
     <section id="hero" class="relative w-full h-screen flex items-center justify-center">
-        <img src="./assets/images/slogan.jng" alt="Slogan" class="absolute inset-0 w-full h-full object-cover object-center">
+        <img src="./assets/images/Tkt.jpg" alt="Slogan" class="absolute inset-0 w-full h-full object-cover object-center">
         <div class="absolute text-center text-black px-6 sm:px-8 lg:px-12 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
              style="font-family: 'Caveat', cursive; line-height: 1.2; max-width: 90%;">
             <p class="whitespace-pre-wrap break-words font-Titre">
